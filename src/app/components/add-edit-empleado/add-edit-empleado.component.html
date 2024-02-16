@@ -1,0 +1,93 @@
+<div class="row">
+    <div class="col-lg-6 mx-5">
+        <h2>{{accion}} Empleado</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4">
+        <form [formGroup]="myForm" autocomplete="off" class="mx-5">
+            <div class="col-lg-12">
+                <mat-form-field class="example-container">
+                    <mat-label>Nombre Completo</mat-label>
+                    <input matInput formControlName="nombreCompleto">
+                </mat-form-field>
+                <div class="error"
+                    *ngIf="myForm.get('nombreCompleto').hasError('required') && myForm.get('nombreCompleto').touched">
+                    <p>*Este campo es <strong>requerido</strong></p>
+                </div>
+                <div class="error"
+                    *ngIf="myForm.get('nombreCompleto').hasError('maxlength') && myForm.get('nombreCompleto').touched">
+                    <p>*Este campo debe tener un máximo de <strong>20 caracteres</strong></p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <mat-form-field class="example-container">
+                    <mat-label>Correo</mat-label>
+                    <input matInput formControlName="correo">
+                </mat-form-field>
+                <div class="error" *ngIf="myForm.get('correo').hasError('required') && myForm.get('correo').touched">
+                    <p>*Este campo es <strong>requerido</strong></p>
+                </div>
+                <div class="error" *ngIf="myForm.get('correo').hasError('email') && myForm.get('correo').touched">
+                    <p>*Este campo debe tener un formato <strong>válido</strong></p>
+                </div>
+            </div>
+            <br>
+            <div class="col-lg-12">
+                <mat-form-field class="example-container">
+                    <mat-label>Fecha Ingreso</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="fechaIngreso">
+                    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
+                </mat-form-field>
+                <div class="error"
+                    *ngIf="myForm.get('fechaIngreso').hasError('required') && myForm.get('fechaIngreso').touched">
+                    <p>*Este campo es <strong>requerido</strong></p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <mat-form-field class="example-container">
+                    <mat-label>Telefono</mat-label>
+                    <input matInput formControlName="telefono">
+                </mat-form-field>
+                <div class="error"
+                    *ngIf="myForm.get('telefono').hasError('required') && myForm.get('telefono').touched">
+                    <p>*Este campo es <strong>requerido</strong></p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <mat-form-field class="example-container">
+                    <mat-label>Estado Civil</mat-label>
+                    <mat-select formControlName="estadoCivil">
+                        <mat-option *ngFor="let estadoCivil of estadosCiviles"
+                            [value]="estadoCivil">{{estadoCivil}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="error"
+                    *ngIf="myForm.get('estadoCivil').hasError('required') && myForm.get('estadoCivil').touched">
+                    <p>*Este campo es <strong>requerido</strong></p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <mat-radio-group aria-label="Seleciona Sexo" formControlName="sexo">
+                    <mat-radio-button value="Masculino">Masculino</mat-radio-button>
+                    <mat-radio-button value="Femenino">Femenino</mat-radio-button>
+                </mat-radio-group>
+                <div class="error" *ngIf="myForm.get('sexo').hasError('required') && myForm.get('sexo').touched">
+                    <p>*Este campo es <strong>requerido</strong></p>
+                </div>
+            </div>
+            <br>
+            <div class="col-lg-12">
+                <button [disabled]="myForm.invalid" (click)="guardarEmpleado()"
+                    class="btn btn-success btn-lg float-end mx-2" type="button">Aceptar</button>
+                <button routerLink="/" class="btn btn-secondary btn-lg float-end" type="button">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-4 offset-lg-2">
+        <img src="../../../assets/img/50426.jpg" alt="nuevo usuario" width="100%">
+    </div>
+</div>
